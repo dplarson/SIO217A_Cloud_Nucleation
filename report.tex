@@ -1,5 +1,7 @@
 \documentclass[]{article}
 
+\usepackage{amsmath}
+
 \title{SIO 217A: Cloud Nucleation}
 \author{Bengu Ozge Akyurek, David Larson, Guangchao Wang}
 \date{\today}
@@ -8,10 +10,36 @@
 
 \maketitle
 
+%--------------------------------------------------------------------
+% INTRO
+%--------------------------------------------------------------------
 \section{Introduction}
 
+%--------------------------------------------------------------------
+% MODEL
+%--------------------------------------------------------------------
 \section{Cloud Nucleation Model}
 
+Assuming the atmospheric ambient conditions (i.e. $S$, $K$, and $D$) are
+constant, then Equation 5.26 can be integrated to get
+\begin{align}
+    \label{eq:5.27}
+    r(t) = \left[ r_0^2 + \frac{2(S -1)}{K + D}(t - t_0)^2 \right]
+\end{align}
+where $K$ and $D$ are defined as
+\begin{align}
+    K &= \frac{L_{lv}^2 \rho_l}{\kappa R_v T^2} \\
+    D &= \frac{\rho_l R_v T}{e_s(T) D_v}
+\end{align}
+
+Solving Equation \ref{eq:5.27} for $t$ results in
+\begin{align}
+    t = (r^2 - r_0^2) \frac{K + D}{2(S - 1)}
+\end{align}
+
+%--------------------------------------------------------------------
+% CONCLUSION
+%--------------------------------------------------------------------
 \section{Conclusion}
 
 \end{document}
