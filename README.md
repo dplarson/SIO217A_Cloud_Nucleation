@@ -1,7 +1,15 @@
 # SIO 217A: Cloud Nucleation
 Term project on cloud nucleation, specifically droplet growth rates.
 
-# Report Requirements
+## Deadlines
+- T 11/12 at 11am = recreate Table 5.5 and sent to instructor
+- F 11/15 at 11am = perform sensitivity analysis and send results to instructor
+- F 11/22 at 11am = send report to instructor for peer review
+- M 11/25 at 11am = peer review comments due
+- M 12/2 and W 12/14 = in-class presentations
+- F 12/6 at 5:30pm = submit final paper and responses to peer comments to instructor
+
+## Report Requirements
 A 3 page paper that includes:
 
 1. Introduction: a brief summary how the topic affects atmospheric thermodynamics.
