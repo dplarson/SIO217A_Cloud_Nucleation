@@ -26,14 +26,24 @@ D_v = 2.21E-5 * 1000 / p;  % diffusion coeff [m^2/s] at p=900mb
 
 % Paramaters
 r = [1, 2, 4, 10, 20, 30, 50] .* 1E-6;  % radius [m]
-m = 1E-14 ./ 1E3;                       % mass [kg]
+m_salt = 1E-14 / 1E3;                   % mass [kg]
 
+% Saturation pressure as function of r and m
+sigma_lv = 0.0761 - 1.55E-4 * (T - 273.0);  % Equation 5.7 (requires T in degrees C)
+MW_salt = 58.44;                            % molecular weight NaCl [g/mol]
+MW_water = 18.02;                           % molecular weight H20 [g/mol]
+i = 3;
+a = 2 * sigma_lv / (rho_l * R_v * T);
+b = 3 * i * MW_water * m_salt / (4 * pi * MW_salt * rho_l);
 
-%% Calculate t from Equation 5.27
+e_s_salt = e_s .* (1 + (a ./ r) - (b ./ r.^3));
+%e_s_salt = e_s .* ((1 - b ./ r.^3) .* exp(a ./ r));
+%e_s_salt = e_s .*(1 - (b ./ r.^3));
+
 % Solve Equation 5.27 for t (assume t0=0)
-K = L_lv^2 * rho_l / (kappa * R_v * T^2);
-D = rho_l * R_v * T / (e_s * D_v);
-t = (r.^2 - r0^2) .* (K + D) ./ (2 * S_1);
+K = L_lv^2 .* rho_l ./ (kappa .* R_v .* T.^2);
+D = rho_l .* R_v * T ./ (e_s_salt .* D_v);
+t = (r.^2 - r0^2) .* (K + D) ./ (2 .* S_1);
 
 
 %% True values (from Table 5.5)
@@ -60,6 +70,6 @@ plot(t_true_12, r * 1E6, '-ob', 'markerface', 'b')
 xlabel('t [s]')
 ylabel('r [um]')
 
-legend({'Ignore mass', '1E-14', '1E-13', '1E-12'}, ...
+legend({'Estimate for 1E-14', '1E-14', '1E-13', '1E-12'}, ...
     'Location', 'NorthOutside', ...
     'Orientation', 'Horizontal')
