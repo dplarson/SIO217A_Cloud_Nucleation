@@ -1,6 +1,15 @@
 \documentclass[]{article}
 
+\usepackage[margin=1.0in]{geometry}
+
+% Equations
 \usepackage{amsmath}
+
+% Better tables
+\usepackage{booktabs}
+\usepackage{multirow}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+
 
 \title{SIO 217A: Cloud Nucleation}
 \author{Bengu Ozge Akyurek, David Larson, Guangchao Wang}
@@ -10,36 +19,49 @@
 
 \maketitle
 
-%--------------------------------------------------------------------
-% INTRO
-%--------------------------------------------------------------------
-\section{Introduction}
+\section{Droplet Growth Rate}
 
-%--------------------------------------------------------------------
-% MODEL
-%--------------------------------------------------------------------
-\section{Cloud Nucleation Model}
+The growth rate of a droplet by diffusion can be approximated as
+\begin{align}
+    \label{eq:5.26}
+    r \frac{dr}{dt} = (S - 1) \left[ \frac{L_{lv}^2 \rho_l}{\kappa R_v T^2} + \frac{\rho_l R_v T}{e_s(T) D_v} \right] ^{-1} = \frac{S - 1}{K + D}
+\end{align}
+where $K$ and $D$ are the thermodynamic terms associated with heat conduction
+and diffusion of water vapor, respectively.
 
-Assuming the atmospheric ambient conditions (i.e. $S$, $K$, and $D$) are
-constant, then Equation 5.26 can be integrated to get
+Assuming the atmospheric ambient conditions are constant (i.e. $S$, $K$, and
+$D$ are constant), then Equation~\ref{eq:5.26} can be integrated to get
 \begin{align}
     \label{eq:5.27}
-    r(t) = \left[ r_0^2 + \frac{2(S -1)}{K + D}(t - t_0)^2 \right]
+    r(t) = \left[ r_0^2 + \frac{2(S -1)}{K + D}(t - t_0)^2 \right] ,
 \end{align}
-where $K$ and $D$ are defined as
-\begin{align}
-    K &= \frac{L_{lv}^2 \rho_l}{\kappa R_v T^2} \\
-    D &= \frac{\rho_l R_v T}{e_s(T) D_v}
-\end{align}
+which can then be rearranged to find $t$
 
-Solving Equation \ref{eq:5.27} for $t$ results in
 \begin{align}
     t = (r^2 - r_0^2) \frac{K + D}{2(S - 1)}
 \end{align}
 
-%--------------------------------------------------------------------
-% CONCLUSION
-%--------------------------------------------------------------------
-\section{Conclusion}
+\begin{table}[h]
+    \centering
+    \caption{Growth rate of droplets with nuclei of NaCl.}
+
+    \ra{1.2}
+    \begin{tabular}{@{} c r r r @{}}
+        \\
+        \toprule
+        m [g] & $10^{-14}$ & $10^{-13}$ & $10^{-12}$ \\
+        \midrule
+        r [$\mu$m] & \multicolumn{3}{c}{t [s]} \\
+        \midrule
+        1  & 2.4    & 0.15   & 0.013 \\
+        2  & 130    & 7.0    & 0.61 \\
+        4  & 1,000  & 320    & 62 \\
+        10 & 2,700  & 1,800  & 870 \\
+        20 & 8,500  & 7,400  & 5,900 \\
+        30 & 17,500 & 16,000 & 14,500 \\
+        50 & 44,500 & 43,500 & 41,500 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \end{document}
