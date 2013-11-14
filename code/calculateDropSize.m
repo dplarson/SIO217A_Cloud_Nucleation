@@ -4,13 +4,13 @@ function [resultValues, timeValues] = calculateDropSize(initialMass, saturationR
 %
 % Inputs:
 %   initialMass: mass of solute base [kg]
-%   saturationRatio: super saturaton [?]
+%   saturationRatio: super saturaton [-]
 %   temperature: ambient temperature [K]
 %   finalTime: end time [s]
 %
 % Outputs:
-%   resultValues:
-%   timeValues:
+%   resultValues: droplet radius vector [um]
+%   timeValues: time vector [s]
 %
 
 % Constants
@@ -20,7 +20,7 @@ T = temperature;      % ambient temperature [K]
 Rho_l = 1000;         % density water [kg/m^3]
 Rho_solt = 2160;      % density NaCl [kg/m^3]
 S = saturationRatio;  % super saturation [-]
-Sigma = 0.0761;       % surface tension []
+Sigma = 0.0761;       % surface tension [N/m]
 M_v = 18;             % molecular weight water [g/mol]
 M_solt = 58.44;       % molecular weight NaCl [g/mol]
 m_solt = initialMass; % mass NaCl [kg]
