@@ -45,31 +45,31 @@ rValueVector = zeros(iterationNumber,1)';
 
 % solve Equation 5.26
 for i=1:iterationNumber
-    
+
     % Kelvin effect
     a = 2 * Sigma/(Rho_l * Rv * T);
-    
+
     % mass of water
     m_w = 4 / 3 * pi * Rho_l * (rValue^3);
-    
+
     % number of moles water (n_w) and solute (n_s)
     n_w = m_w/M_v;
     n_s = iConstant*m_solt/M_solt;
-    
+
     % saturation pressure with solute
     myConstant = n_w/(n_w+n_s);
     e_s = e_sInf * exp(a/rValue) * myConstant;
-    
+
     % heat conduction (K) and diffusion (D) [s/m^2]
     K = L^2 * Rho_l / (T^2 * Kappa * Rv);
     D = Rho_l * Rv * T / (Dv * e_s);
-    
+
     ratio = (S - 1) / (K + D);
     rValue = (ratio / rValue) * deltaT + rValue;
-    
+
     % convert from [m] to [um]
     rValueVector(i) = 1E6 * rValue;
-    
+
     if rValue > 0.75*1E-6 && t0==0
         t0 = i * deltaT;
     end
