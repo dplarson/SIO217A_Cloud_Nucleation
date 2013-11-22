@@ -163,6 +163,37 @@ def plot_temperature(t):
     plt.savefig('r_t_temperature.pdf')
     #plt.show()
 
+
+def plot_supersaturation(t):
+    """Plot r(t) for multiple supersaturation values."""
+
+    # r(t) with varying S_1 [%]
+    # NOTE: keep L_lv constant (for now)
+    r_05 = droplet_radius(t, S_1=0.05)
+    r_10 = droplet_radius(t, S_1=0.10)
+    r_15 = droplet_radius(t, S_1=0.15)
+    r_20 = droplet_radius(t, S_1=0.20)
+
+    plt.figure()
+    ax = plt.subplot(111)
+
+    ax.plot(t, r_05, ls='-', c='0.0')
+    ax.plot(t, r_10, ls=':',lw=1.5, c='0.0')
+    ax.plot(t, r_15, ls='-', c='0.5')
+    ax.plot(t, r_20, ls='--', c='0.5')
+
+    ax.set_xlabel('t [s]')
+    ax.set_ylabel(r'r [$\mu m$]')
+
+    ax.set_xticks([0.5E4, 1.5E4, 2.5E4, 3.5E4, 4.5E4])
+
+    ax.grid()
+
+    ax.set_ylim([0.0, 110.0])
+
+    plt.savefig('r_t_supersaturation.pdf')
+    #plt.show()
+
 if __name__ == '__main__':
 
     t_start = 0.0
@@ -170,8 +201,11 @@ if __name__ == '__main__':
     t_delta = 1.0
     t = np.arange(t_start, t_end, t_delta)
 
-    # plot r(t) of model vs Table 5.5
+    # r(t) of model vs Table 5.5
     #plot_table(t)
 
-    # plot r(t) as temperature is varied
+    # r(t) as temperature is varied
     #plot_temperature(t)
+
+    # r(t) as supersaturation is varied
+    #plot_supersaturation(t)
