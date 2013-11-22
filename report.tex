@@ -48,10 +48,21 @@ Brief summary of how the topic affects atmospheric thermodynamics.
 \section{Cloud Droplet Growth}
 
 \subsection{Model Description}
-Description of the model, its assumptions, and its possible shortcomings.
+In order to model the cloud droplet growth in time, we have used Equation~\eqref{eq:5.26} from our \cite{Curry} This equation is based on \cite{Mason}, which is based on \cite{Best}. The approximation assumes that a droplet has the shape of a sphere around a saturated nucleus core. Furthermore, the environment conditions are assumed to be constant and, the solute and curvature effects are neglected. The initial approximation is obtained by applying diffusion equations to the droplet, shown in Equation~\eqref{eq:Diffusion}.
 
+\begin{equation}
+    \label{eq:Diffusion}
+    \dfrac{dm}{dt}=4 \pi r D_{v} \left( \rho_{v}(\infty) - \rho_{v}(r) \right)
+\end{equation}
 
-The growth rate of a droplet by diffusion can be approximated as
+Adding the latent heat by condensation, shown in Equation~\eqref{eq:LatentHeat}, gives the basis of the droplet growth rate model.
+
+\begin{equation}
+    \label{eq:LatentHeat}
+    \dfrac{dQ}{dt}=-L_{lv}\dfrac{dm}{dt}=-4 \pi r \kappa \left( T(\infty) - T(r) \right)
+\end{equation}
+
+These equations are combined to approximate the growth rate of a droplet by diffusion as
 \begin{align}
     \label{eq:5.26}
     r \frac{dr}{dt} = (S - 1) \left[ \frac{L_{lv}^2 \rho_l}{\kappa R_v T^2} + \frac{\rho_l R_v T}{e_s(T) D_v} \right] ^{-1} = \frac{S - 1}{K + D}
@@ -68,10 +79,11 @@ $D$ are constant), then Equation~\ref{eq:5.26} can be integrated to get
 which can then be rearranged to find $t$
 
 \begin{align}
+    \label{eq:5.27T}
     t = (r^2 - r_0^2) \frac{K + D}{2(S - 1)}
 \end{align}
 
-Using the values from Table~\ref{tab:parameters}
+Using the values from Table~\ref{tab:parameters}, the main results in Table~\ref{tab:MainResults} can be approximated. Yet, the approximation fails drastically. We have applied various adjustments to the initial approximation in order to increase the accuracy of our results and the applicability of our model.
 
 
 \begin{table}[h]
@@ -103,6 +115,7 @@ Using the values from Table~\ref{tab:parameters}
     \centering
     \caption{Growth rate of droplets with nuclei of NaCl, ($S - 1$)=0.05\%,
         $p$=900mb, $T$=273K, and $r_0$=0.75$\mu$m recreated from Table 5.5 of \cite{Curry}.}
+    \label{tab:MainResults}
 
     \ra{1.2}
     \begin{tabular}{@{} c r r r @{}}
@@ -122,6 +135,59 @@ Using the values from Table~\ref{tab:parameters}
         \bottomrule
     \end{tabular}
 \end{table}
+
+
+One of the main reasons for failure is due to the fact that the Equation~\eqref{eq:5.27T} does not depend on the nucleus mass. This led us to the first modification on the approximation equation. Rather than starting from $r=r_{0}=0.75\ 10^{-6} \mu m$ and $t_{0}=0$, we have altered the definition of the starting radius as the radius of the nucleus without any water. We haven't changed the value of $r_{0}$, as this was given as one of the constants. But, we have defined $t_{0}$ as the time the radius of the droplet develops to $r_{0}$, which is definitely not $0$.
+
+To calculate the initial radius, we have assumed that the nucleus is a perfect sphere. Thus, the initial radius can calculated by Equation~\eqref{eq:InitialRadius}.
+
+\begin{equation}
+    \label{eq:InitialRadius}
+    \rho_{NaCl}\frac{4}{3}\pi r_{i}^{3}=m_{NaCl}
+\end{equation}
+
+We have used $\rho_{NaCl}=2160 \frac{kg}{m^{3}}$. This adjustment introduced an effect of the nucleus mass and decreased the overall error of our approximation.
+
+The secondary improvement was on $e_{s}$. The approximation assumed $e_{s}$ to be a constant, but normally it is not. Especially for small $r$ values, \cite{Best} states that $e_{s}$ deviates from its constant value significantly. We have applied two modifications on $e_{s}$. The first adjustment is the usage of Raoult's law to incorporate the effect of surface tension, introducing an additional factor depending on both $r$ and the mass of the nucleus. This factor is shown in Equation~\eqref{eq:RaoultsLaw}. $i$ is a constant depending on the molecular structure of the nucleus core and is taken as $i=2$.
+
+\begin{equation}
+    \label{eq:RaoultsLaw}
+    \dfrac{e_{s}}{e_{s\infty}}=\dfrac{n_{H2O}}{i n_{solt}+n_{H2O}}=\dfrac{\dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}{i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}
+\end{equation}
+
+The second modification is the introduction of the effect of curvature, which is shown in Equation~\eqref{eq:Curvature}.
+
+\begin{equation}
+    \label{eq:Curvature}
+    \dfrac{e_{s}}{e_{s\infty}}=\exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
+\end{equation}
+
+The combined effect of surface tension and the curvature are given in Equation~\eqref{eq:EsDefinition}.
+
+\begin{equation}
+    \label{eq:EsDefinition}
+    e_{s}(r,T)=e_{s\infty}\left(\dfrac{\dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}{i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}\right) \exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
+\end{equation}
+
+A final modification has been applied on the numerator $(S-1)$ as recommended by \cite{Mason}. The numerator is redefined in Equation~\eqref{eq:Numerator} to add surface tension and curvature effects.
+
+\begin{equation}
+    \label{eq:Numerator}
+    (S-1) \rightarrow (S-1)+\dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr}-\dfrac{i n_{solt}}{i n_{solt}+n_{H2O}}
+\end{equation}
+
+Although this equation increases the accuracy of the results, it depends itself on $r$. This means that the simple quadratic solution can not be used anymore and we need a numerical integration method to solve the integral. The explicit Euler method has been used for integration. The iterative steps are defined in Equation~\eqref{eq:Iteration}.
+
+\begin{equation}
+    \label{eq:Iteration}
+    r_{k+1}= \dfrac{S - 1+\dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr}-\dfrac{n_{solt}}{i n_{solt}+n_{H2O}}}{K(T) + D(r_{k},T)}\dfrac{\Delta t}{r_{k}}
+\end{equation}
+
+The initial condition at $k=0$ is $r=r_{i}$ which was calculated as the radius of the nucleus core itself.
+
+Although this approximation is close to the values in Table~\ref{tab:MainResults}, it has its drawbacks with respect to reality. The first limitation is that we have assumed the temperature to be constant throughout the droplet and same as the environment. The second drawback is that we have assumed that the environment properties like $\kappa, D_{v}, L_{lv}$ stay constant, which introduces an extra error into our approximation.
+
+Another drawback is due to the numeric integration error. We have computed the symbolic integral via Wolfram and compared its result with the numeric integration result, but the difference was small enough to be negligible. An insignificant approximation is on the shape of both the nucleus core and the droplet, as these will deviate from spheres in real cases.
 
 
 \subsection{Model Parameters}
