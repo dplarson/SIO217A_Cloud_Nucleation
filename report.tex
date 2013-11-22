@@ -52,9 +52,9 @@ In order to model the cloud droplet growth in time, we have used
 Equation~\eqref{eq:5.26} from \cite{Curry}. This equation is based on
 \cite{Mason}, which is based on \cite{Best}. The approximation assumes that a
 droplet has the shape of a sphere around a saturated nucleus core. Furthermore,
-the environment conditions are assumed to be constant and, the solute and
+the environment conditions are assumed to be constant, and the solute and
 curvature effects are neglected. The initial approximation is obtained by
-applying diffusion equations to the droplet, shown in
+applying diffusion equations to the droplet, as shown in
 Equation~\eqref{eq:Diffusion}.
 
 \begin{equation}
@@ -94,7 +94,7 @@ which can then be rearranged to find $t$
 \end{align}
 
 Using the values from Table~\ref{tab:parameters}, the main results in
-Table~\ref{tab:MainResults} can be approximated. Yet, the approximation fails
+Table~\ref{tab:Table5.5} can be approximated. Yet, the approximation fails
 drastically. We have applied various adjustments to the initial approximation
 in order to increase the accuracy of our results and the applicability of our
 model.
@@ -102,7 +102,7 @@ model.
 
 \begin{table}[h]
     \centering
-    \caption{Paramters for droplet growth rate.}
+    \caption{Parameters for droplet growth rate.}
     \label{tab:parameters}
 
     \begin{tabular}{l l l l}
@@ -129,7 +129,7 @@ model.
     \centering
     \caption{Growth rate of droplets with nuclei of NaCl, ($S - 1$)=0.05\%,
         $p$=900mb, $T$=273K, and $r_0$=0.75$\mu$m recreated from Table 5.5 of \cite{Curry}.}
-    \label{tab:MainResults}
+    \label{tab:Table5.5}
 
     \ra{1.2}
     \begin{tabular}{@{} c r r r @{}}
@@ -225,7 +225,7 @@ The initial condition at $k=0$ is $r=r_{i}$ which was calculated as the radius
 of the nucleus core itself.
 
 Although this approximation is close to the values in
-Table~\ref{tab:MainResults}, it has its drawbacks with respect to reality. The
+Table~\ref{tab:Table5.5}, it has its drawbacks with respect to reality. The
 first limitation is that we have assumed the temperature to be constant
 throughout the droplet and same as the environment. The second drawback is that
 we have assumed that the environment properties like $\kappa, D_{v}, L_{lv}$
