@@ -308,8 +308,19 @@ latent heat of condensation away from the droplet.
 % RESULTS
 %--------------------------------------------------
 \section{Results of Modeling Study}
-Conclusions you draw from your modeling study, with as much physical insight
-as the modeling results allow.
+Figure~\ref{fig:r_t} shows a visual comparison between the droplet growth rate
+modeled by Equation~\eqref{eq:5.27} with $r_0 = 0.75 \mu m$, $T=273 K$, $p=900
+mb$, and $(S - 1) = 0.05\%$. A major assumption of Equation~\ref{5.27} is that
+the curvature and solute effects are neglible once the droplet grows beyond a
+few microns. The figure shows general agreement between the model and values
+from Table 5.5 of \cite{Curry}.
+
+To study the sensitivity of the model, we varied $T$ and $(S - 1)$, separately,
+while holding all other parameters constant. Figure~\ref{fig:temperature} and
+~\ref{fig:supersaturation} show the results. Increasing $T$ increases the
+droplet growth rate, due to decreased values of $K$ and increased values of
+$D$.  Likewise, increasing $(S - 1)$ increases the droplet growth rate due to
+an increased amount of water vapor, which lowers the activation.
 
 \begin{figure}\label{fig:r_t}
     \centering
@@ -334,6 +345,14 @@ as the modeling results allow.
 % CONCLUSION
 %--------------------------------------------------
 \section{Conclusion}
+We have evaluated a simplified model of droplet growth rate in warm clouds.
+Although the model ignores curvature and solute effects, the model is still
+able to capture the general trends of droplet growth, as validated against
+droplet growth values from \cite{Curry, Mason, Best} that include curvature and
+solute effects. Sensitivity analysis of the model to changes in ambient temperature $T$
+and supersaturation $(S -1)$ show a positive relationship between the droplet growth rate
+and $T$, and the droplet growth rate and $(S - 1)$.
+
 
 
 %--------------------------------------------------
