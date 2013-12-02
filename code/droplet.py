@@ -18,8 +18,8 @@ params = {
 
     # lines
     'lines.linestyle': '-',
-    'lines.linewidth': 1.0,
-    'axes.color_cycle': 'k',
+    'lines.linewidth': 1.2,
+    'axes.color_cycle': ['k', 'k', '#E3640F', '#E3640F'],
     'lines.markersize': 8,
     'lines.markeredgewidth': 1.0,
 
@@ -138,7 +138,7 @@ def plot_temperature(t):
 
     # r(t) with varying T
     # NOTE: keep L_lv constant (for now)
-    r_273 = droplet_radius(t, T=273.0, e_s=6.15E2, kappa=2.40E-2, D_v=2.21E-6)
+    r_273 = droplet_radius(t, T=273.0)
     r_283 = droplet_radius(t, T=283.0, e_s=12.3E2, kappa=2.48E-2, D_v=2.36E-5)
     r_293 = droplet_radius(t, T=293.0, e_s=23.4E2, kappa=2.55E-2, D_v=2.52E-5)
     r_303 = droplet_radius(t, T=303.0, e_s=42.4E2, kappa=2.63E-2, D_v=2.69E-5)
@@ -146,10 +146,10 @@ def plot_temperature(t):
     plt.figure()
     ax = plt.subplot(111)
 
-    ax.plot(t, r_273, ls='-', c='0.0')
-    ax.plot(t, r_283, ls=':',lw=1.5, c='0.0')
-    ax.plot(t, r_293, ls='-', c='0.5')
-    ax.plot(t, r_303, ls='--', c='0.5')
+    ax.plot(t, r_273, ls='-', label='273 K')
+    ax.plot(t, r_283, ls='--', label='283 K')
+    ax.plot(t, r_293, ls='-', label='293 K')
+    ax.plot(t, r_303, ls='--', label='303 K')
 
     ax.set_xlabel('t [s]')
     ax.set_ylabel(r'r [$\mu m$]')
@@ -159,6 +159,8 @@ def plot_temperature(t):
     ax.grid()
 
     ax.set_ylim([0.0, 90.0])
+
+    ax.legend(loc='lower right')
 
     plt.savefig('r_t_temperature.pdf')
     #plt.show()
@@ -177,10 +179,10 @@ def plot_supersaturation(t):
     plt.figure()
     ax = plt.subplot(111)
 
-    ax.plot(t, r_05, ls='-', c='0.0')
-    ax.plot(t, r_10, ls=':',lw=1.5, c='0.0')
-    ax.plot(t, r_15, ls='-', c='0.5')
-    ax.plot(t, r_20, ls='--', c='0.5')
+    ax.plot(t, r_05, ls='-', label='0.05%')
+    ax.plot(t, r_10, ls='--', label='0.10%')
+    ax.plot(t, r_15, ls='-', label='0.15%')
+    ax.plot(t, r_20, ls='--', label='0.20%')
 
     ax.set_xlabel('t [s]')
     ax.set_ylabel(r'r [$\mu m$]')
@@ -191,8 +193,11 @@ def plot_supersaturation(t):
 
     ax.set_ylim([0.0, 110.0])
 
+    ax.legend(loc='lower right')
+
     plt.savefig('r_t_supersaturation.pdf')
     #plt.show()
+
 
 if __name__ == '__main__':
 
@@ -202,10 +207,10 @@ if __name__ == '__main__':
     t = np.arange(t_start, t_end, t_delta)
 
     # r(t) of model vs Table 5.5
-    #plot_table(t)
+    plot_table(t)
 
     # r(t) as temperature is varied
-    #plot_temperature(t)
+    plot_temperature(t)
 
     # r(t) as supersaturation is varied
-    #plot_supersaturation(t)
+    plot_supersaturation(t)
