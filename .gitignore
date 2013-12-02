@@ -1,6 +1,9 @@
 # Code
 *.py[cod]
 *~
+code/*.png
+code/*.jpg
+code/*.pdf
 
 # Data
 *.csv
