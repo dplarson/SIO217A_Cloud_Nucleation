@@ -20,7 +20,7 @@ params = {
     'lines.linestyle': '-',
     'lines.linewidth': 1.2,
     'axes.color_cycle': ['k', 'k', '#E3640F', '#E3640F'],
-    'lines.markersize': 8,
+    'lines.markersize': 10,
     'lines.markeredgewidth': 1.0,
 
     # grid
@@ -103,31 +103,31 @@ def plot_table(t):
     """
     r = droplet_radius(t, T=273.0, e_s=0.6E3)
 
-    # Table 5.5 values
+    # Table 5.5 values (r [um] and t [hours])
     r_true = [1, 2, 4, 10, 20, 30, 50]
-    t_true14 = [2.4, 130, 1E3, 2.7E3, 8.5E3, 17.5E3, 44.5E3]
-    t_true13 = [0.15, 7.0, 320, 1.8E3, 7.4E3, 16.0E3, 43.5E3]
-    t_true12 = [0.013, 0.61, 62, 870, 5.9E3, 14.5E3, 41.5E3]
+    t_true14 = np.asarray([2.4, 130, 1E3, 2.7E3, 8.5E3, 17.5E3, 44.5E3]) / 3.6E3
+    t_true13 = np.asarray([0.15, 7.0, 320, 1.8E3, 7.4E3, 16.0E3, 43.5E3]) / 3.6E3
+    t_true12 = np.asarray([0.013, 0.61, 62, 870, 5.9E3, 14.5E3, 41.5E3]) / 3.6E3
 
     plt.figure()
     ax = plt.subplot(111)
 
-    ax.plot(t, r, ls='-', c='0.0')
-    ax.plot(t_true14, r_true, ls='', marker='o', markerfacecolor='0.3')
-    ax.plot(t_true13, r_true, ls='', marker='s', markerfacecolor='w', markeredgecolor='0.0')
-    ax.plot(t_true12, r_true, ls='', marker='^', markerfacecolor='0.3')
+    ax.plot(t / 3.6E3, r, label='Model')
+    ax.plot(t_true14, r_true, label=r'$10^{-14}$ g', ls='',
+            marker='o', markerfacecolor='0.3')
+    ax.plot(t_true13, r_true, label=r'$10^{-13}$ g', ls='',
+            marker='s', markerfacecolor='w', markeredgecolor='0.0')
+    ax.plot(t_true12, r_true, label=r'$10^{-12}$ g', ls='',
+            marker='^', markeredgecolor='#E3640F', markerfacecolor='#E3640F')
 
-    ax.set_xlabel('t [s]')
+    ax.set_xlabel('t [hours]')
     ax.set_ylabel(r'r [$\mu m$]')
-
-    ax.set_xticks([0.5E4, 1.5E4, 2.5E4, 3.5E4, 4.5E4])
-
-    # add legend above the plot and without a border
-    #ax.legend(loc='upper center', ncol=4, bbox_to_anchor=(0.5, 1.0), frameon=False)
 
     ax.grid()
 
     ax.set_ylim([0.0, 55.0])
+
+    ax.legend(loc='lower right')
 
     plt.savefig('r_t.pdf')
     #plt.show()
@@ -146,12 +146,15 @@ def plot_temperature(t):
     plt.figure()
     ax = plt.subplot(111)
 
+    # convert seconds to hours
+    t = t / 3.6E3
+
     ax.plot(t, r_273, ls='-', label='273 K')
     ax.plot(t, r_283, ls='--', label='283 K')
     ax.plot(t, r_293, ls='-', label='293 K')
     ax.plot(t, r_303, ls='--', label='303 K')
 
-    ax.set_xlabel('t [s]')
+    ax.set_xlabel('t [hours]')
     ax.set_ylabel(r'r [$\mu m$]')
 
     ax.set_xticks([0.5E4, 1.5E4, 2.5E4, 3.5E4, 4.5E4])
@@ -179,15 +182,16 @@ def plot_supersaturation(t):
     plt.figure()
     ax = plt.subplot(111)
 
+    # convert seconds to hours
+    t = t / 3.6E3
+
     ax.plot(t, r_05, ls='-', label='0.05%')
     ax.plot(t, r_10, ls='--', label='0.10%')
     ax.plot(t, r_15, ls='-', label='0.15%')
     ax.plot(t, r_20, ls='--', label='0.20%')
 
-    ax.set_xlabel('t [s]')
+    ax.set_xlabel('t [hours]')
     ax.set_ylabel(r'r [$\mu m$]')
-
-    ax.set_xticks([0.5E4, 1.5E4, 2.5E4, 3.5E4, 4.5E4])
 
     ax.grid()
 
