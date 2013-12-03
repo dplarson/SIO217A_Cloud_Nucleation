@@ -27,7 +27,10 @@ params = {
     'grid.linestyle': ':',
     'grid.linewidth': 0.5,
     'grid.color': 'k',
-    'grid.alpha': 0.3
+    'grid.alpha': 0.3,
+
+    # legend
+    'legend.numpoints': 1
 }
 rcParams.update(**params)
 
@@ -101,7 +104,7 @@ def plot_table(t):
         Time array.
 
     """
-    r = droplet_radius(t, T=273.0, e_s=0.6E3)
+    r = droplet_radius(t)
 
     # Table 5.5 values (r [um] and t [hours])
     r_true = [1, 2, 4, 10, 20, 30, 50]
@@ -125,6 +128,7 @@ def plot_table(t):
 
     ax.grid()
 
+    ax.set_xlim([0.0, 14.0])
     ax.set_ylim([0.0, 55.0])
 
     ax.legend(loc='lower right')
@@ -157,11 +161,10 @@ def plot_temperature(t):
     ax.set_xlabel('t [hours]')
     ax.set_ylabel(r'r [$\mu m$]')
 
-    ax.set_xticks([0.5E4, 1.5E4, 2.5E4, 3.5E4, 4.5E4])
-
     ax.grid()
 
-    ax.set_ylim([0.0, 90.0])
+    ax.set_xlim([0.0, 14.0])
+    ax.set_ylim([0.0, 100.0])
 
     ax.legend(loc='lower right')
 
@@ -195,7 +198,8 @@ def plot_supersaturation(t):
 
     ax.grid()
 
-    ax.set_ylim([0.0, 110.0])
+    ax.set_xlim([0.0, 14.0])
+    ax.set_ylim([0.0, 100.0])
 
     ax.legend(loc='lower right')
 
@@ -206,7 +210,7 @@ def plot_supersaturation(t):
 if __name__ == '__main__':
 
     t_start = 0.0
-    t_end = 45.0E3
+    t_end = 50.0E3
     t_delta = 1.0
     t = np.arange(t_start, t_end, t_delta)
 
