@@ -147,11 +147,13 @@ def plot_temperature(t):
     r_293 = droplet_radius(t, T=293.0, e_s=23.4E2, kappa=2.55E-2, D_v=2.52E-5)
     r_303 = droplet_radius(t, T=303.0, e_s=42.4E2, kappa=2.63E-2, D_v=2.69E-5)
 
-    plt.figure()
-    ax = plt.subplot(111)
-
     # convert seconds to hours
     t = t / 3.6E3
+
+    #------------------------------
+    # r vs t
+    fig_r = plt.figure()
+    ax = plt.subplot(111)
 
     ax.plot(t, r_273, ls='-', label='273 K')
     ax.plot(t, r_283, ls='--', label='283 K')
@@ -168,8 +170,29 @@ def plot_temperature(t):
 
     ax.legend(loc='lower right')
 
-    plt.savefig('r_t_temperature.pdf')
-    #plt.show()
+    fig_r.savefig('r_t_temperature.pdf')
+
+
+    #------------------------------
+    # dr/dt vs t
+    fig_dr = plt.figure()
+    ax = plt.subplot(111)
+
+    t_delta = t[1] - t[0]
+
+    ax.plot(t, np.gradient(r_273, t_delta), label='273 K')
+    ax.plot(t, np.gradient(r_283, t_delta), ls='--', label='283 K')
+    ax.plot(t, np.gradient(r_293, t_delta), label='293 K')
+    ax.plot(t, np.gradient(r_303, t_delta), ls='--', label='303 K')
+
+    ax.grid()
+
+    ax.set_xlabel('t [hours]')
+    ax.set_ylabel(r'dr/dt [$\mu m$ / hour]')
+
+    ax.legend(loc='upper right')
+
+    fig_dr.savefig('dr_t_temperature.pdf')
 
 
 def plot_supersaturation(t):
@@ -182,11 +205,13 @@ def plot_supersaturation(t):
     r_15 = droplet_radius(t, S_1=0.15)
     r_20 = droplet_radius(t, S_1=0.20)
 
-    plt.figure()
-    ax = plt.subplot(111)
-
     # convert seconds to hours
     t = t / 3.6E3
+
+    #------------------------------
+    # r vs t
+    fig_r = plt.figure()
+    ax = plt.subplot(111)
 
     ax.plot(t, r_05, ls='-', label='0.05%')
     ax.plot(t, r_10, ls='--', label='0.10%')
@@ -203,8 +228,28 @@ def plot_supersaturation(t):
 
     ax.legend(loc='lower right')
 
-    plt.savefig('r_t_supersaturation.pdf')
-    #plt.show()
+    fig_r.savefig('r_t_supersaturation.pdf')
+
+    #------------------------------
+    # dr/dt vs t
+    fig_dr = plt.figure()
+    ax = plt.subplot(111)
+
+    t_delta = t[1] - t[0]
+
+    ax.plot(t, np.gradient(r_05, t_delta), label='0.05%')
+    ax.plot(t, np.gradient(r_10, t_delta), ls='--', label='0.10%')
+    ax.plot(t, np.gradient(r_15, t_delta), label='0.15%')
+    ax.plot(t, np.gradient(r_20, t_delta), ls='--', label='0.20%')
+
+    ax.set_xlabel('t [hours]')
+    ax.set_ylabel(r'dr/dt [$\mu m$ / hour]')
+
+    ax.grid()
+
+    ax.legend(loc='upper right')
+
+    fig_dr.savefig('dr_t_supersaturation.pdf')
 
 
 if __name__ == '__main__':
