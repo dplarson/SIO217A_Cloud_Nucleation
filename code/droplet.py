@@ -18,8 +18,8 @@ params = {
 
     # lines
     'lines.linestyle': '-',
-    'lines.linewidth': 1.2,
-    'axes.color_cycle': ['k', 'k', '#E3640F', '#E3640F'],
+    'lines.linewidth': 1.4,
+    'axes.color_cycle': ['k', 'k', '#019e99', '#019e99'],
     'lines.markersize': 10,
     'lines.markeredgewidth': 1.0,
 
@@ -185,6 +185,7 @@ def plot_temperature(t):
     ax.plot(t, np.gradient(r_293, t_delta), label='293 K')
     ax.plot(t, np.gradient(r_303, t_delta), ls='--', label='303 K')
 
+    ax.set_yscale('log')
     ax.grid()
 
     ax.set_xlabel('t [hours]')
@@ -245,6 +246,7 @@ def plot_supersaturation(t):
     ax.set_xlabel('t [hours]')
     ax.set_ylabel(r'dr/dt [$\mu m$ / hour]')
 
+    ax.set_yscale('log')
     ax.grid()
 
     ax.legend(loc='upper right')
