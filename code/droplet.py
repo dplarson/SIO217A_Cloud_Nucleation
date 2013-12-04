@@ -19,7 +19,7 @@ params = {
     # lines
     'lines.linestyle': '-',
     'lines.linewidth': 1.4,
-    'axes.color_cycle': ['k', 'k', '#019e99', '#019e99'],
+    'axes.color_cycle': ['k', 'k', '#F24F30', '#F24F30'],
     'lines.markersize': 10,
     'lines.markeredgewidth': 1.0,
 
