@@ -327,11 +327,22 @@ that the curvature and solute effects are neglible once the droplet grows
 beyond a few microns. The figure shows general agreement between the model and
 values from Table 5.5 of \cite{Curry}.
 
+By considering curvature and solute effects, Equation~\eqref{eq:Iteration} is
+able to recreate the values from Table 5.5 of \cite{Curry} (see
+Figure~\ref{fig:r_t_modified}).
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{r_t.pdf}
-    \caption{Droplet growth rate of the simplified model against the values from Table 5.5 of \cite{Curry}.}
+    \caption{Droplet growth rate of the simplified model (Equation~\eqref{eq:5.27}) against the values from Table 5.5 of \cite{Curry}.}
     \label{fig:r_t}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{r_t_modified.jpg}
+    \caption{Droplet growth rate when curvature and solute effects are included.}
+    \label{fig:r_t_modified}
 \end{figure}
 
 
