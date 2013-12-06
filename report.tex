@@ -75,9 +75,9 @@ droplet growth rate.
 In order to model the cloud droplet growth as a function of time, we have used
 Equation~\eqref{eq:5.26} from \cite{Curry}. This equation is based on
 \cite{Mason}, which is based on \cite{Best}. The approximation assumes that a
-droplet is spherical and has a saturated nucleus core. Furthermore,
-the environment conditions are assumed to be constant, and the solute and
-curvature effects are neglected. The initial approximation is obtained by
+droplet has the shape of a sphere that develops around a saturated nucleus core. Furthermore,
+the environment conditions~(Temperature, pressure and related parameters) are assumed to be constant, and the solute and
+curvature effects are neglected, which will be explained in more detail. The initial approximation is obtained by
 applying diffusion equations to the droplet, as shown in
 Equation~\eqref{eq:Diffusion}.
 
@@ -102,9 +102,9 @@ diffusion as
     r \frac{dr}{dt} = (S - 1) \left[ \frac{L_{lv}^2 \rho_l}{\kappa R_v T^2} + \frac{\rho_l R_v T}{e_s(T) D_v} \right] ^{-1} = \frac{S - 1}{K + D}
 \end{align}
 where $K$ and $D$ are the thermodynamic terms associated with heat conduction
-and diffusion of water vapor, respectively.
+and diffusion of water vapor, respectively. This differential equation is the same as Equation 5.26 in \cite{Mason}. $S$ is the saturation ratio, $\rho_l$ the liquid density, $e_s$ the saturation pressure in the droplet and $T$ is the environment temperature.
 
-Assuming the atmospheric ambient conditions are constant (i.e. $S$, $K$, and
+Assuming the atmospheric ambient conditions are constant (i.e. $T$, $S$, $K$, and
 $D$ are constant), then Equation~\eqref{eq:5.26} can be integrated to get
 \begin{align}
     \label{eq:5.27}
@@ -118,8 +118,7 @@ which can then be rearranged to find $t$
 \end{align}
 
 Using the values from Table~\ref{tab:parameters}, the main results in
-Table~\ref{tab:Table5.5} can be approximated. But to include the effects of
-curvature and the solute, we must modify our model.
+Table~\ref{tab:Table5.5} can be approximated. But to include the effects of initial mass, curvature and the solute, we must modify our model.
 
 
 \begin{table}[h]
@@ -150,7 +149,7 @@ curvature and the solute, we must modify our model.
 \begin{table}[h]
     \centering
     \caption{Growth rate of droplets with nuclei of NaCl, ($S - 1$)=0.05\%,
-        $p$=900mb, $T$=273K, and $r_0$=0.75$\mu$m, as listed in Table 5.5 of \cite{Curry}.}
+        $p$=900mb, $T$=273K, and $r_0$=0.75$\mu$m recreated from Table 5.5 of \cite{Curry}.}
     \label{tab:Table5.5}
 
     \ra{1.2}
@@ -174,9 +173,9 @@ curvature and the solute, we must modify our model.
 
 
 One of the main properties of Equation~\eqref{eq:5.27T} is that it does not
-depend on the nucleus mass. This led us to the first modification on the
-approximation equation. Rather than starting from $r=r_{0}=0.75\ 10^{-6} \mu m$
-and $t_{0}=0$, we have altered the definition of the starting radius as the
+depend on the nucleus mass, which directly contradicts with Table~\ref{tab:Table5.5}. This led us to the first modification on the
+approximation Equation~\eqref{eq:5.27T}. Rather than starting from $r=r_{0}=0.75\ 10^{-6} \mu m$
+and $t_{0}=0$ as given in the conditions of Table~\ref{tab:Table5.5}, we have altered the definition of the starting radius as the
 radius of the nucleus without any water. We haven't changed the value of
 $r_{0}$, as this was given as one of the constants. But, we have defined
 $t_{0}$ as the time the radius of the droplet develops to $r_{0}$, which is
@@ -191,17 +190,15 @@ Equation~\eqref{eq:InitialRadius}.
 \end{equation}
 
 We have used $\rho_{NaCl}=2160 \frac{kg}{m^{3}}$. This adjustment introduced an
-effect of the nucleus mass and decreased the overall error of our
-approximation.
+effect of the nucleus mass and decreased the overall error of the first given approximation.
 
 The secondary improvement was on $e_{s}$. The approximation assumed $e_{s}$ to
 be a constant, but normally it is not. Especially for small $r$ values,
-\cite{Best} states that $e_{s}$ deviates from its constant value significantly.
-We have applied two modifications on $e_{s}$. The first adjustment is the usage
+\cite{Best} states that $e_{s}$ deviates from its average value significantly. Since our starting point involves small values of $r$, we have applied two modifications on $e_{s}$. The first adjustment is the usage
 of Raoult's law to incorporate the effect of surface tension, introducing an
 additional factor depending on both $r$ and the mass of the nucleus. This
 factor is shown in Equation~\eqref{eq:RaoultsLaw}. $i$ is a constant depending
-on the molecular structure of the nucleus core and is taken as $i=2$.
+on the molecular structure of the nucleus core and is taken as $i=2$. $e_{s\infty}$ is the saturation pressure of the environment (at a virtual radius of $r=\infty$).
 
 \begin{equation}
     \label{eq:RaoultsLaw}
@@ -217,16 +214,16 @@ is shown in Equation~\eqref{eq:Curvature}.
 \end{equation}
 
 The combined effect of surface tension and the curvature are given in
-Equation~\eqref{eq:EsDefinition}.
+Equation~\eqref{eq:EsDefinition}. Throughout our calculations and simulations, we assume $T$ to be constant as its deviations from its initial value is negligible. This modification in $e_{s}$ directly affects our $D$ value in Equation~\eqref{eq:5.26}.
 
 \begin{equation}
     \label{eq:EsDefinition}
     e_{s}(r,T)=e_{s\infty}\left(\dfrac{\dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}{i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}\right) \exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
 \end{equation}
 
-A final modification has been applied on the numerator $(S-1)$ as recommended
+A final modification has been applied on the numerator $(S-1)$ of Equation~\eqref{eq:5.26} as recommended
 by \cite{Mason}. The numerator is redefined in Equation~\eqref{eq:Numerator} to
-add surface tension and curvature effects.
+add surface tension and curvature effects, where $n$ represents the mole number of the material in the subscript.
 
 \begin{equation}
     \label{eq:Numerator}
@@ -234,8 +231,8 @@ add surface tension and curvature effects.
 \end{equation}
 
 Although this equation increases the accuracy of the results, it depends itself
-on $r$. This means that the simple quadratic solution can not be used anymore
-and we need a numerical integration method to solve the integral. The explicit
+on $r$. This means that the simple quadratic solution in Equation~\eqref{eq:5.27T} can not be used any more
+and we need a numerical integration method to solve the differential equation in Equation~\eqref{eq:5.26}. The explicit
 Euler method has been used for integration. The iterative steps are defined in
 Equation~\eqref{eq:Iteration}.
 
@@ -250,7 +247,7 @@ of the nucleus core itself.
 Although this approximation is close to the values in
 Table~\ref{tab:Table5.5}, it has its drawbacks with respect to reality. The
 first limitation is that we have assumed the temperature to be constant
-throughout the droplet and same as the environment. The second drawback is that
+throughout the droplet and same as the environment at all times. The second drawback is that
 we have assumed that the environment properties like $\kappa, D_{v}, L_{lv}$
 stay constant, which introduces an extra error into our approximation.
 
@@ -259,6 +256,7 @@ symbolic integral via Wolfram and compared its result with the numeric
 integration result, but the difference was small enough to be negligible. An
 insignificant approximation is on the shape of both the nucleus core and the
 droplet, as these will deviate from spheres in real cases.
+
 
 
 \subsection{Model Parameters}
