@@ -325,11 +325,9 @@ modeled by Equation~\eqref{eq:5.27} with $r_0 = 0.75 \mu m$, $T=273 K$, $p=900
 mb$, and $(S - 1) = 0.05\%$. A major assumption of Equation~\eqref{eq:5.27} is
 that the curvature and solute effects are neglible once the droplet grows
 beyond a few microns. The figure shows general agreement between the model and
-values from Table 5.5 of \cite{Curry}.
-
-By considering curvature and solute effects, Equation~\eqref{eq:Iteration} is
-able to recreate the values from Table 5.5 of \cite{Curry} (see
-Figure~\ref{fig:r_t_modified}).
+values from Table 5.5 of \cite{Curry}. But by considering curvature and solute
+effects, Equation~\eqref{eq:Iteration} is able to recreate the values from
+Table 5.5 of \cite{Curry} (see Figure~\ref{fig:r_t_modified}).
 
 \begin{figure}[h]
     \centering
@@ -348,10 +346,12 @@ Figure~\ref{fig:r_t_modified}).
 
 To study the sensitivity of the model, we varied $T$ and $(S - 1)$, separately,
 while holding all other parameters constant. Figure~\ref{fig:temperature} and
-~\ref{fig:supersaturation} show the results.  Increasing $T$ increases the
-droplet growth rate, due to decreased values of $K$ and increased values of
-$D$.  Likewise, increasing $(S - 1)$ increases the droplet growth rate due to
-an increased amount of water vapor, which lowers the activation.
+~\ref{fig:supersaturation} show the results. The increased values of $T$
+correspond physically to increasing the heat diffused away from the droplet
+(decreased $K$) and decreasing the amount of water vapor diffused into the
+droplet (increased $D$).  Similarily, increased values of $S - 1$ increase the
+droplet growth rate due to an increased amount of water vapor, which lowers the
+amount of energy needed to achieve activation.
 
 \begin{figure}
     \centering
@@ -373,7 +373,7 @@ an increased amount of water vapor, which lowers the activation.
 % CONCLUSION
 %--------------------------------------------------
 \section{Conclusion}
-We have evaluated a simplified model of droplet growth rate in warm clouds.
+We have evaluated a simplified model of droplet growth rate in clouds.
 Although the model ignores curvature and solute effects, the model is still
 able to capture the general trends of droplet growth, as validated against
 droplet growth values from \cite{Curry, Mason, Best} that include curvature and
