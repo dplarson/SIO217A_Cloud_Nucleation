@@ -38,6 +38,7 @@
 
 \maketitle
 
+\newpage
 
 %--------------------------------------------------
 % INTRO
@@ -45,25 +46,32 @@
 \section{Introduction}
 Atmospheric thermodynamics focuses on water and its transformations. Advanced
 topics are usually focused on phase transitions of water, homogeneous and
-inhomogeneous nucleation, effect of dissolved substances on cloud condensation,
-role of supersaturation on formation of ice crystals and cloud droplets.
+heterogeneous nucleation, and role of supersaturation on formation of ice
+crystals and cloud droplets. Among those sub-topics, cloud nucleation is one of
+the most interest areas that many scientists have been working on in the past
+decades.
 
-Among those sub-topics, cloud nucleation is one area that
-many researchers have worked on in the past several decades. Nucleation is
-continually occurring in the atmosphere, both during gas-to-particle production
-processes and in cloud formation which is a heterogeneous nucleation process
-and involves nucleation centers or cloud nuclei.
+Nucleation process, essentially, is energy balance between surface tension and
+latent heat. When the latent heat associated with condensation is enough to
+counteract the surface tension on the drop, the drop is nucleated. However, the
+surface tension could be very large in a small water droplet. In order to break
+the high energy barrier on the drop surface, high saturation ratio is needed.
+The supersaturation could be up to 500\% for homogeneous nucleation of water
+drop, and thus water droplet is hard to form cloud. In the real atmosphere,
+supersaturation is a little bit higher than 100\%, so we start to understand
+the heterogeneous nucleation of cloud drops, involving a cloud condensation
+nuclei which are a subset of aerosol particles. Since those soluble particles
+such as sodium chloride is able to lower the equilibrium vapor pressure of a
+water solution relative to pure water and thus partially counteract the effects
+of surface tension, and subsequently being easier to form cloud. To further
+understand those phenomena, we choose cloud nucleation as well as growth of
+cloud drops as our topic.
 
-People want to understand this process whereby a stable element of a new phase
-first appears within the initial or parent phase for several reasons, one of
-which is that the clouds have a very high albedo, and thus tend to reflect
-incoming shortwave radiation back into space. Another reason that affects
-atmospheric thermodynamics is that the nucleated clouds, as a new phase, could
-produce precipitation, which is the primary route for water to move
-geographically around the globe within the water cycle. To begin understanding
-the larger effects of clouds, it is useful to analyze the growth of droplets in
-warm clouds. This report discusses and evaluates one simplified model of
-droplet growth rate.
+To proceed, we assume an isolated, spherical water droplet of mass, radius and
+density. Second, droplet is growing by the diffusion of water vapor to the
+surface. Third, the temperature and water vapor density of the remote
+environment remain constant. Last, we only consider a steady state diffusion
+field.
 
 
 %--------------------------------------------------
@@ -275,45 +283,23 @@ droplet, as these will deviate from spheres in real cases.
 
 \subsection{Model Parameters}
 $K$ is the thermodynamic term related to the latent heat release due to
-condensation and diffusion of heat away from the droplet. It depends on the
-ambient temperature $T$, latent heat of vaporization $L_{lv}$ and the thermal
-conductivity coefficient $\kappa$. $\rho_l$ denotes the water density.
-$\kappa$ is the coefficient of thermal conductivity in air and increases with
-increasing temperature to account for the faster heat conduction at higher
-temperatures due to the higher kinetic energy of the air molecules.
-
-$D$ is the vapor diffusion term related to the diffusion of water vapor onto
-the growing droplet. It depends on the saturation vapor pressure $e_{s}$,
-temperature $T$, and the coefficient of water vapor diffusion in air $D_v$.
-$D_v$ increases with increasing temperature but decreases with increasing
-pressure. An increase in pressure means a decrease in the mean free path of the
-molecules so that collisions with other molecules and particles occur more
-frequently. The increase of  $D_v$ with increasing temperature again accounts
-for the faster diffusion at higher temperatures.
-
-In addition, $S$ is saturation ratio. If $S$ is less than 1, the growth rate
+condensation and diffusion of heat away from the droplet.  $D$ is the vapor
+diffusion term related to the diffusion of water vapor onto the growing
+droplet. Plus, $S$ is saturation ratio. So if $S$ is less than 1,
 $\frac{dr}{dt}$ is less than 0, which describes the evaporation of a cloud
-drop. Conversely, $S$ greater than 1 describes the condensation of a cloud
-drop.
+drop. In the other way when $S$ is greater than 1, it describes the
+condensation of a cloud drop.
 
-In Equation~\eqref{eq:5.27}, $K$ depends on temperature and $D$
-depends on temperature and pressure. The higher the temperature, the smaller is
-the term $K$. $D$ has temperature dependent terms both in the numerator and in
-the denominator. Here the temperature dependence in the denominator dominates
-so that $K$ also decreases with increasing temperature. This means that the
-denominator is smaller for higher temperatures, i.e.\ the droplets grow or
-shrink faster at higher temperatures for a given saturation ratio $S$. This is
-intuitive because at higher temperature, the absolute difference in water vapor
-pressure between the droplet surface and its surroundings is higher for a given
-saturation ratio, and therefore also the water vapor pressure gradient at the droplet
-surface, which drives diffusional growth or evaporation of the droplet.
+Water vapor is transferred to the drop by molecular diffusion as long as the
+vapor pressure surrounding the drop exceeds the saturation vapor pressure of
+the drop. As water condenses on the drop, latent heat release, the drop becomes
+warmer than the environment, and heat is diffused away from the drop.
+Condensation can thus be considered as a double diffusive process, with water
+vapor diffused towards the drop and heat diffused away from the drop.
 
-Diffusive transport in droplet growth process is smaller than advective
-transport, but plays an important role in the process because water vapor is
-diffused towards the cloud drop, and heat is diffused away from the cloud drop.
-In sum, the droplet growth rate is a function of saturation ratio over the sum
-of rate of transfer of water vapor to the droplet and rate of transfer of
-latent heat of condensation away from the droplet.
+In sum, the droplet growth rate is a function of saturation ratio over the
+balance force between diffusion and convection.
+
 
 
 %--------------------------------------------------
