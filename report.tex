@@ -230,11 +230,11 @@ The second modification is the introduction of the effect of curvature:
     \dfrac{e_{s}}{e_{s\infty}}=\exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right) .
 \end{equation}
 
-The combined effect of surface tension and the curvature is
+The combined effect of surface tension and the curvature is then
 
 \begin{equation}
     \label{eq:EsDefinition}
-    e_{s}(r,T)=e_{s\infty}\left(\dfrac{\dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}{i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}\right) \exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
+    e_{s}(r,T) = e_{s\infty} \left[ \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}} \right] \left[ i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}} \right] ^{-1} \exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
 \end{equation}
 
 Throughout our calculations and simulations, we assume $T$ to be constant as
@@ -318,7 +318,7 @@ Table 5.5 of \cite{Curry} (see Figure~\ref{fig:r_t_modified}).
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{r_t_modified.jpg}
-    \caption{Droplet growth rate when curvature and solute effects are included.}
+    \caption{Droplet growth rate with a nuclei of NaCl, and curvature and solute effects are included. The values are calculated numerically using Equation~\eqref{eq:Iteration} with $\Delta t = 0.1$, $T = 273 K$, $p = 900 mb$, and $S - 1 = 0.05 \%$.}
     \label{fig:r_t_modified}
 \end{figure}
 
