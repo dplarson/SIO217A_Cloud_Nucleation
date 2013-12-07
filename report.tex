@@ -197,13 +197,14 @@ $t_{0}$ as the time the radius of the droplet develops to $r_{0}$, which is
 definitely not $0$.
 
 To calculate the initial radius, we have assumed that the nucleus is a perfect
-sphere. Thus, the initial radius can calculated by
-Equation~\eqref{eq:InitialRadius}.
+sphere. Thus, the initial radius can calculated as
 
-\begin{equation} \label{eq:InitialRadius} \rho_{NaCl}\frac{4}{3}\pi
-    r_{i}^{3}=m_{NaCl} \end{equation}
+\begin{equation}
+    \label{eq:InitialRadius}
+    \rho_{NaCl}\frac{4}{3}\pi r_{i}^{3}=m_{NaCl} .
+\end{equation}
 
-We have used $\rho_{NaCl}=2160 \frac{kg}{m^{3}}$. This adjustment introduced an
+We have used $\rho_{NaCl}$=2160 kg m$^{-3}$. This adjustment introduced an
 effect of the nucleus mass and decreased the overall error of the first given
 approximation.
 
@@ -220,51 +221,52 @@ saturation pressure of the environment (at a virtual radius of $r=\infty$).
 
 \begin{equation}
     \label{eq:RaoultsLaw}
-    \dfrac{e_{s}}{e_{s\infty}}=\dfrac{n_{H2O}}{i n_{solt}+n_{H2O}}=\dfrac{\dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}{i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}
+    \dfrac{e_{s}}{e_{s\infty}} = \dfrac{n_{H2O}}{i n_{solt}+n_{H2O}} = \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}} \left[ i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}} \right]
 \end{equation}
 
-The second modification is the introduction of the effect of curvature, which
-is shown in Equation~\eqref{eq:Curvature}.
+The second modification is the introduction of the effect of curvature:
 
 \begin{equation}
     \label{eq:Curvature}
-    \dfrac{e_{s}}{e_{s\infty}}=\exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
+    \dfrac{e_{s}}{e_{s\infty}}=\exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right) .
 \end{equation}
 
-The combined effect of surface tension and the curvature are given in
-Equation~\eqref{eq:EsDefinition}. Throughout our calculations and simulations,
-we assume $T$ to be constant as its deviations from its initial value is
-negligible. This modification in $e_{s}$ directly affects our $D$ value in
-Equation~\eqref{eq:5.26}.
+The combined effect of surface tension and the curvature is
 
 \begin{equation}
     \label{eq:EsDefinition}
     e_{s}(r,T)=e_{s\infty}\left(\dfrac{\dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}{i \dfrac{m_{solt}}{M_{solt}} + \dfrac{\dfrac{4}{3}\pi r^{3} \rho_{H2O}}{M_{H2O}}}\right) \exp \left( \dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} \right)
 \end{equation}
 
+Throughout our calculations and simulations, we assume $T$ to be constant as
+its deviations from its initial value is negligible. This modification in
+$e_{s}$ directly affects our $D$ value in Equation~\eqref{eq:5.26}.
+
+
 A final modification has been applied on the numerator $(S-1)$ of
-Equation~\eqref{eq:5.26} as recommended by \cite{Mason}. The numerator is
-redefined in Equation~\eqref{eq:Numerator} to add surface tension and curvature
-effects, where $n$ represents the mole number of the material in the subscript.
+Equation~\eqref{eq:5.26} as recommended by \cite{Mason}. By adding the
+curvature effects we find
 
 \begin{equation}
     \label{eq:Numerator}
     (S-1) \rightarrow (S-1)+\dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr}-\dfrac{i n_{solt}}{i n_{solt}+n_{H2O}}
 \end{equation}
+where $n$ represents the mole number of the material in the subscript.
+
 
 Although this equation increases the accuracy of the results, it depends itself
 on $r$. This means that the simple quadratic solution in
 Equation~\eqref{eq:5.27T} can not be used any more and we need a numerical
 integration method to solve the differential equation in
-Equation~\eqref{eq:5.26}. The explicit Euler method has been used for
-integration. The iterative steps are defined in Equation~\eqref{eq:Iteration}.
+Equation~\eqref{eq:5.26}. Using the explicit Euler method we are able to
+calculate $r$ iteratively as
 
 \begin{equation}
     \label{eq:Iteration}
-    r_{k+1}= \dfrac{S - 1+\dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr}-\dfrac{n_{solt}}{i n_{solt}+n_{H2O}}}{K(T) + D(r_{k},T)}\dfrac{\Delta t}{r_{k}}
+    r_{k+1}= \left[ \dfrac{S - 1+\dfrac{2\sigma_{lv}}{\rho_{l}R_{v}Tr} - \dfrac{n_{solt}}{i n_{solt}+n_{H2O}}}{K(T) + D(r_{k},T)} \right] \dfrac{\Delta t}{r_{k}}
 \end{equation}
 
-The initial condition at $k=0$ is $r=r_{i}$ which was calculated as the radius
+The initial condition at $k=0$ is $r=r_0$ which was calculated as the radius
 of the nucleus core itself.
 
 Although this approximation is close to the values in Table~\ref{tab:Table5.5},
@@ -274,31 +276,23 @@ the environment at all times. The second drawback is that we have assumed that
 the environment properties like $\kappa, D_{v}, L_{lv}$ stay constant, which
 introduces an extra error into our approximation.
 
-Another drawback is due to the numeric integration error. We have computed the
-symbolic integral via Wolfram and compared its result with the numeric
-integration result, but the difference was small enough to be negligible. An
-insignificant approximation is on the shape of both the nucleus core and the
-droplet, as these will deviate from spheres in real cases.
-
 
 \subsection{Model Parameters}
 $K$ is the thermodynamic term related to the latent heat release due to
 condensation and diffusion of heat away from the droplet.  $D$ is the vapor
 diffusion term related to the diffusion of water vapor onto the growing
-droplet. Plus, $S$ is saturation ratio. So if $S$ is less than 1,
-$\frac{dr}{dt}$ is less than 0, which describes the evaporation of a cloud
-drop. In the other way when $S$ is greater than 1, it describes the
-condensation of a cloud drop.
+droplet. Plus, $S$ is saturation ratio. If $S < 1$, then $dr/ dt < 0$, which
+describes the evaporation of a cloud drop. And if $S > 1$, then $dr/dt > 0$ and
+the droplet grows by condensation.
 
 Water vapor is transferred to the drop by molecular diffusion as long as the
 vapor pressure surrounding the drop exceeds the saturation vapor pressure of
 the drop. As water condenses on the drop, latent heat release, the drop becomes
 warmer than the environment, and heat is diffused away from the drop.
 Condensation can thus be considered as a double diffusive process, with water
-vapor diffused towards the drop and heat diffused away from the drop.
-
-In sum, the droplet growth rate is a function of saturation ratio over the
-balance force between diffusion and convection.
+vapor diffused towards the drop and heat diffused away from the drop. Therefore
+cloud droplet growth is a balance between diffusion of water vapor and
+convection.
 
 
 
@@ -359,13 +353,19 @@ amount of energy needed to achieve activation.
 % CONCLUSION
 %--------------------------------------------------
 \section{Conclusion}
-We have evaluated two droplet growth models in clouds that form due to
+We have evaluated two droplet growth models for clouds that form due to
 vapor-to-liquid condensation. The first model, taken from \cite{Curry}, is a
 simplified model that ignores curvature and solute effects, but captures the
 general behavior of the droplet growth. The second model includes curvature and
 solute effects, and is able to recreate the values from Table 5.5 of
 \cite{Curry}. A sensitivity analysis shows a positive correlation between droplet
 growth, and both temperature and supersaturation.
+
+Both models describe droplet growth by diffusion only and therefore do not take into
+account the effect of collisions and coalescence between droplets, which become
+important once $r > 20 \mu m$. Additionally, the models do not consider changes
+in $S$ over time as less water vapor is available. A more robust version of the
+models should incorporate the effects of both coalesence and changing $S$.
 
 
 %--------------------------------------------------
